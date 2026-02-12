@@ -1,6 +1,22 @@
 import discord
 from discord.ext import commands
 import random
+import os
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Mori is online!" 
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -28,5 +44,7 @@ async def 午餐(ctx):
     food = random.choice(food_list)
     await ctx.send(f"The Reaper has decided. Today you're having **{food}**!")
 
-token = os.getenv('DISCORD_TOKEN')
-bot.run(token)
+if __name__ == "__main__":
+    token = os.getenv('DISCORD_TOKEN')
+    keep_alive()  
+    bot.run(token) 
