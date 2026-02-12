@@ -28,4 +28,5 @@ async def 午餐(ctx):
     food = random.choice(food_list)
     await ctx.send(f"The Reaper has decided. Today you're having **{food}**!")
 
-bot.run('MTQ3MTQ2NTgzNDg3NzU1MDcyNQ.GgbbkM.vczFzU3LcuSeJKPIHKNDrf29hgHqCUFPOm44fs')
+token = os.getenv('DISCORD_TOKEN')
+bot.run(token)
