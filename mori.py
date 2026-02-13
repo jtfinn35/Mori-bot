@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discord import app_commands  
+from discord import app_commands
 import random
 import os
 from flask import Flask
@@ -19,6 +19,12 @@ def run():
 def keep_alive():
     t = Thread(target=run)
     t.start()
+
+FOOD_LIST = [
+    "麥當勞", "肯德基", "便利商店", 
+    "牛肉麵", "水餃", "壽司", 
+    "不吃！", "喝紅酒", "芋頭火鍋", "香菜洋芋片"
+]
 
 
 intents = discord.Intents.default()
@@ -41,22 +47,22 @@ async def on_ready():
         
     print('Mori Calliope is ready！')
 
+
 @bot.tree.command(name="hello", description="跟 Mori 打個招呼")
 async def hello(interaction: discord.Interaction):
-
     await interaction.response.send_message(f'Yo Minasan, hey {interaction.user.mention}! This is your Mori! GUH! 💀')
 
-
+# 午餐
 @bot.tree.command(name="lunch", description="讓死神幫你決定午餐吃什麼")
 async def lunch(interaction: discord.Interaction):
-    food_list = [
-        "麥當勞", "肯德基", "便利商店", 
-        "牛肉麵", "水餃", "壽司", 
-        "不吃！", "喝紅酒", "芋頭火鍋", "香菜洋芋片"
-    ]
-    food = random.choice(food_list)
-    await interaction.response.send_message(f"The Reaper has decided. Today you're having **{food}**!")
+    food = random.choice(FOOD_LIST)
+    await interaction.response.send_message(f"The Reaper has decided. For lunch, you're having **{food}**!")
 
+# 晚餐
+@bot.tree.command(name="dinner", description="讓死神幫你決定晚餐吃什麼")
+async def dinner(interaction: discord.Interaction):
+    food = random.choice(FOOD_LIST)
+    await interaction.response.send_message(f"The Reaper has decided. For dinner, you're having **{food}**!")
 
 if __name__ == "__main__":
     token = os.getenv('DISCORD_TOKEN')
