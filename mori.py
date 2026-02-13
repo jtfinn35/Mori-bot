@@ -60,7 +60,7 @@ class MoriBot(commands.Bot):
         print('Finney\'s Izakaya Mori Bot 上線中！')
 
     # --- 任務一：YouTube 直播/影片通知 ---
-    @tasks.loop(minutes=3.0) # YT 檢查可以頻繁一點
+    @tasks.loop(minutes=3.0)
     async def check_youtube_task(self):
         channel = self.get_channel(self.yt_discord_channel)
         if not channel: return
@@ -73,7 +73,7 @@ class MoriBot(commands.Bot):
 
         if self.last_yt_id != video_id:
             if self.last_yt_id is not None:
-                # --- 新增：抓取縮圖內容 ---
+                # --- 抓取縮圖內容 ---
                 thumbnail_url = ""
                 if 'media_thumbnail' in latest_video:
                     thumbnail_url = latest_video.media_thumbnail[0]['url']
@@ -85,11 +85,11 @@ class MoriBot(commands.Bot):
                     color=0x7f0020 
                 )
                 
-                # 如果有抓到縮圖，就設定成大張圖片顯示
                 if thumbnail_url:
                     embed.set_image(url=thumbnail_url)
                     
-                embed.set_footer(text="Finney's Izakaya • 帳房直播監控")
+                # 修改為與推特一致的「特報」風格
+                embed.set_footer(text="Finney's Izakaya • 本日開演特報")
                 await channel.send(content="Deadbeats, listen up! New stream or video is out!", embed=embed)
             self.last_yt_id = video_id
 
@@ -113,7 +113,8 @@ class MoriBot(commands.Bot):
                     url=latest_tweet.link,
                     color=0x7f0020 
                 )
-                embed.set_footer(text="Finney's Izakaya • 本日特選特報")
+                # 維持你設定的店內轉播風格
+                embed.set_footer(text="Finney's Izakaya • 本日特選推報")
                 await channel.send(content="Deadbeats, assemble!", embed=embed)
             self.last_tweet_id = tweet_id
 
