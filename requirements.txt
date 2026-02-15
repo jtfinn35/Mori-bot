@@ -1,0 +1,5 @@
+discord.py
+feedparser
+flask
+aiohttp
+google-api-python-client
