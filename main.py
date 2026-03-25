@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 import os
-from keep_alive import keep_alive
+from dotenv import load_dotenv
+load_dotenv()
 
 class MoriBot(commands.Bot):
     def __init__(self):        
@@ -24,6 +25,5 @@ class MoriBot(commands.Bot):
 
 if __name__ == "__main__":
     bot = MoriBot()
-    keep_alive()
     token = os.getenv('DISCORD_TOKEN')
     bot.run(token)
