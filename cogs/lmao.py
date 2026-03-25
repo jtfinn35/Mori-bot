@@ -11,7 +11,7 @@ class ReplyCog(commands.Cog):
             return
             
         if message.content == "超好笑":
-            await message.channel.send("https://imgur.com/gallery/up-1616-IYf0am5#/t/photo")
+            await message.channel.send("https://raw.githubusercontent.com/jtfinn35/Mori-bot/main/%E8%B6%85%E5%A5%BD%E7%AC%91-%E5%BD%A9.png")
 
 async def setup(bot):
     await bot.add_cog(ReplyCog(bot))
