@@ -1,5 +1,4 @@
-discord.py
-feedparser
-flask
+discord.py>=2.3
+python-dotenv
 aiohttp
-google-api-python-client
+flask
